@@ -42,3 +42,14 @@ export interface OwlItem {
 ```
 
 The OwlItem is the list item itself, it has a text and a status. Status allows to provide visual feedback to the users while async operations are taking place.
+
+# Local environment
+
+To use this locally, run the following commands:
+
+```
+npm i
+npm start
+```
+
+We use dotenv to pass environment variables, if you need to change the API URL, just edit (or add) the REACT_APP_API_URL environment variable in the .env file.
