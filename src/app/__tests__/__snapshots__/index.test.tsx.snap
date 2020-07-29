@@ -3,13 +3,13 @@
 exports[`<App /> should render and match the snapshot 1`] = `
 <BrowserRouter>
   <Helmet
-    defaultTitle="React Boilerplate"
+    defaultTitle="Owl.List"
     defer={true}
     encodeSpecialCharacters={true}
-    titleTemplate="%s - React Boilerplate"
+    titleTemplate="%s - Owl.List"
   >
     <meta
-      content="A React Boilerplate application"
+      content="Owl List"
       name="description"
     />
   </Helmet>
@@ -18,6 +18,11 @@ exports[`<App /> should render and match the snapshot 1`] = `
       component={[Function]}
       exact={true}
       path="/"
+    />
+    <Route
+      component={[Function]}
+      exact={true}
+      path="/list/:_id"
     />
     <Route
       component={[Function]}

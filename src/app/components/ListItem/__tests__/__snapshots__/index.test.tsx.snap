@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ListItem /> should match snapshot 1`] = `
+.c0 {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.c0:hover {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  opacity: 0.8;
+}
+
+.c0:active {
+  opacity: 0.4;
+}
+
+<div>
+  <a
+    class="c0"
+    href="/list/1"
+  >
+    &gt; 
+    test
+  </a>
+   
+  <button>
+    X
+  </button>
+</div>
+`;
