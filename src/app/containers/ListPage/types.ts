@@ -10,8 +10,9 @@ export interface ListPageState {
 }
 
 export enum OwlItemErrorType {
-  NAME_EMPTY = 1,
-  RESPONSE_ERROR = 2,
+  MISSING_PARAM = 400,
+  RESPONSE_ERROR = 500,
+  NOTFOUND_ERROR = 404,
 }
 
 /* 

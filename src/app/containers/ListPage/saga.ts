@@ -3,7 +3,6 @@ import { request } from 'utils/request';
 import { selectOwlListId, selectItems } from './selectors';
 import { actions } from './slice';
 import { OwlItems } from 'owl-types/types/OwlItems';
-import { OwlItemErrorType } from './types';
 /**
  * Loads all the owlItems from the backend
  */
@@ -16,7 +15,7 @@ export function* loadOwlListItems() {
     });
     yield put(actions.owlItemsLoaded(allListItems));
   } catch (err) {
-    yield put(actions.owlItemError(OwlItemErrorType.RESPONSE_ERROR));
+    yield put(actions.owlItemError(err.response.status));
   }
 }
 
@@ -25,7 +24,7 @@ export function* loadOwlListItems() {
  */
 export function* saveOwlListItems() {
   // TODO: Remove next line, used for demo purpose only.
-  yield delay(2500);
+  yield delay(1500);
   const modifiedOwlListItems: OwlItems = yield select(selectItems);
   const requestURL = `${process.env.REACT_APP_API_URL}/item`;
   const list_id = yield select(selectOwlListId);
@@ -34,11 +33,15 @@ export function* saveOwlListItems() {
     list_id: list_id,
     id: modifiedOwlListItems._id,
   };
-  yield call(request, requestURL, {
-    method: 'put',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(requestBody),
-  });
+  try {
+    yield call(request, requestURL, {
+      method: 'put',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(requestBody),
+    });
+  } catch (err) {
+    yield put(actions.owlItemError(err.response.status));
+  }
   yield loadOwlListItems();
 }
 

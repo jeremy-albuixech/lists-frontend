@@ -10,6 +10,7 @@ import { owlItemSaga } from './saga';
 import { OwlListItem } from '../../components/OwlListItem';
 import { OwlItems } from 'owl-types/types/OwlItems';
 import { Link } from 'app/components/Link';
+import { OwlItemErrorType } from './types';
 
 export function ListPage() {
   let list_id: string = useParams();
@@ -96,10 +97,27 @@ export function ListPage() {
           </button>
         </List>
       ) : error ? (
-        <span>{error}</span>
+        <ErrorText>{owlListErrorText(error)}</ErrorText>
       ) : null}
     </>
   );
 }
+
+export const owlListErrorText = (error: OwlItemErrorType) => {
+  switch (error) {
+    case OwlItemErrorType.MISSING_PARAM:
+      return '400 - Missing one of the request parameters.';
+    case OwlItemErrorType.RESPONSE_ERROR:
+      return '500 - There was an error during the request.';
+    case OwlItemErrorType.NOTFOUND_ERROR:
+      return "404 - We couldn't find the document requested.";
+    default:
+      return 'An error has occurred!';
+  }
+};
+
+const ErrorText = styled.div`
+  color: ${p => p.theme.text};
+`;
 
 const List = styled.div``;

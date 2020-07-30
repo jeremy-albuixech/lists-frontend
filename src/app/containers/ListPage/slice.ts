@@ -80,6 +80,7 @@ const listPageSlice = createSlice({
      * @triggers the saga saveOwlListItems
      */
     changeOrder(state, action: PayloadAction<any>) {
+      state.owlItems.items[action.payload.id].status = 'pending';
       state.owlItems.items.splice(
         action.payload.id - action.payload.inc,
         0,

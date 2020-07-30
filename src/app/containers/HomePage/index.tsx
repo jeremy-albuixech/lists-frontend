@@ -7,6 +7,7 @@ import { selectLists, selectError, selectNewListName } from './selectors';
 import { ListItem } from '../../components/ListItem';
 import { sliceKey, reducer, actions } from './slice';
 import { owlListSaga } from './saga';
+import { OwlListErrorType } from './types';
 
 export function HomePage() {
   useInjectReducer({ key: sliceKey, reducer: reducer });
@@ -60,10 +61,27 @@ export function HomePage() {
           ))}
         </List>
       ) : error ? (
-        <span>{error}</span>
+        <ErrorText>{owlListErrorText(error)}</ErrorText>
       ) : null}
     </>
   );
 }
+
+export const owlListErrorText = (error: OwlListErrorType) => {
+  switch (error) {
+    case OwlListErrorType.MISSING_PARAM:
+      return '400 - Missing one of the request parameters.';
+    case OwlListErrorType.RESPONSE_ERROR:
+      return '500 - There was an error during the request.';
+    case OwlListErrorType.NOTFOUND_ERROR:
+      return "404 - We couldn't find the document requested.";
+    default:
+      return 'An error has occurred!';
+  }
+};
+
+const ErrorText = styled.span`
+  color: ${p => p.theme.text};
+`;
 
 const List = styled.div``;

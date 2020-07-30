@@ -53,3 +53,13 @@ npm start
 ```
 
 We use dotenv to pass environment variables, if you need to change the API URL, just edit (or add) the REACT_APP_API_URL environment variable in the .env file.
+
+For development purposes, you can link the owl-types repository directly in your folder:
+
+```
+# git clone git@github.com:albi34/owl-types.git
+# cd owl-frontend/
+owl-frontend/# npm link ../owl-types
+```
+
+This creates a symlink in your node_modules folder.

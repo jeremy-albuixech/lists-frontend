@@ -16,7 +16,7 @@ export function* loadLists() {
     });
     yield put(actions.owlListsLoaded(allLists));
   } catch (err) {
-    yield put(actions.listError(OwlListErrorType.RESPONSE_ERROR));
+    yield put(actions.listError(err.response.status));
   }
 }
 
@@ -31,7 +31,7 @@ export function* deleteList() {
       method: 'delete',
     });
   } catch (err) {
-    yield put(actions.listError(OwlListErrorType.RESPONSE_ERROR));
+    yield put(actions.listError(err.response.status));
   }
   yield loadLists();
 }
@@ -42,7 +42,7 @@ export function* createList() {
   // Select list name from store
   const newListName: string = yield select(selectNewListName);
   if (newListName.length === 0) {
-    yield put(actions.listError(OwlListErrorType.NAME_EMPTY));
+    yield put(actions.listError(OwlListErrorType.MISSING_PARAM));
     return;
   }
   const requestURL = `${process.env.REACT_APP_API_URL}/list`;
@@ -55,7 +55,7 @@ export function* createList() {
     });
     yield put(actions.loadOwlLists());
   } catch (err) {
-    yield put(actions.listError(OwlListErrorType.RESPONSE_ERROR));
+    yield put(actions.listError(err.response.status));
   }
 }
 
