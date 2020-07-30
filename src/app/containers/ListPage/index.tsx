@@ -24,9 +24,11 @@ export function ListPage() {
   const onChangeOwlItem = (
     evt: React.ChangeEvent<HTMLInputElement>,
     item: OwlItems,
+    index: number,
   ) => {
+    console.log(evt);
     dispatch(
-      actions.editOwlItem({ value: evt.currentTarget.value, _id: item._id }),
+      actions.editOwlItem({ value: evt.currentTarget.value, index: index }),
     );
   };
   const setNewItemText = (itemText: string) => {
@@ -84,7 +86,7 @@ export function ListPage() {
               key={index}
               text={item.text}
               status={item.status}
-              onChange={e => onChangeOwlItem(e, item)}
+              onChange={e => onChangeOwlItem(e, item, index)}
             />
           ))}
 

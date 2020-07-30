@@ -95,11 +95,15 @@ const listPageSlice = createSlice({
     resetList(state) {
       state.owlItems.items = [];
     },
+    /**
+     * Updates an item value.
+     * @param state
+     * @triggers the saga saveOwlListItems
+     */
     editOwlItem(state, action: PayloadAction<any>) {
-      if (state.owlItems) {
-        let itemIndex = action.payload.id;
-        state.owlItems.items[itemIndex] = action.payload.value;
-      }
+      let itemIndex = action.payload.index;
+      state.owlItems.items[itemIndex].text = action.payload.value;
+      state.owlItems.items[itemIndex].status = 'modified';
     },
     /**
      * Sets the list ID to load the corresponding items.
@@ -131,6 +135,17 @@ const listPageSlice = createSlice({
     owlItemError(state, action: PayloadAction<OwlItemErrorType>) {
       state.error = action.payload;
       state.loading = false;
+    },
+    /**
+     * Sets the status to Pending for all the Modified items.
+     * @param state
+     */
+    markAsPending(state) {
+      state.owlItems.items.forEach(item => {
+        if (item.status === 'modified') {
+          item.status = 'pending';
+        }
+      });
     },
   },
 });
