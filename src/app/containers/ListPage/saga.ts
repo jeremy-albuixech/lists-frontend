@@ -11,7 +11,7 @@ const SECOND = 1000;
  */
 export function* loadOwlListItems() {
   const list_id = yield select(selectOwlListId);
-  const requestURL = `${process.env.REACT_APP_API_URL}/item/${list_id._id}`;
+  const requestURL = `${process.env.REACT_APP_API_URL}/item/${list_id._id}?nocache=true`;
   try {
     const allListItems: OwlItems = yield retry(
       3,

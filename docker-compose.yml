@@ -1,0 +1,12 @@
+version: '3'
+services:
+  owl-frontend:
+    build: .
+    env_file: .env.local
+    ports:
+      - "3300:3300"
+    entrypoint: ["npm", "start"]
+    volumes:
+      - .:/usr/src/owl-frontend
+      - ./node_modules:/usr/src/owl-frontend/node_modules/
+    stdin_open: true

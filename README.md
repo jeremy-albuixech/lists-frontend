@@ -63,3 +63,11 @@ owl-frontend/# npm link ../owl-types
 ```
 
 This creates a symlink in your node_modules folder.
+
+# Local environment with docker
+
+There is a docker-compose file to easily start all services and dependencies. It also mounts the source code folder as a volume to allow the live-reload feature.
+
+```
+docker-compose up
+```

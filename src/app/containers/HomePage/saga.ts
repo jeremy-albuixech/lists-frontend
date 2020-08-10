@@ -9,7 +9,7 @@ import { OwlListErrorType } from './types';
  * Loads all the lists from the backend
  */
 export function* loadLists() {
-  const requestURL = `${process.env.REACT_APP_API_URL}/list`;
+  const requestURL = `${process.env.REACT_APP_API_URL}/list?nocache=true`;
   try {
     const allLists: OwlList[] = yield call(request, requestURL, {
       method: 'get',
