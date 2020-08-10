@@ -20,7 +20,7 @@ export const ListItem = memo(({ _id, name, ...restOf }: Props) => {
     dispatch(actions.loadOwlLists());
   };
   return (
-    <div>
+    <span>
       <Link to={process.env.PUBLIC_URL + '/list/' + _id}>&gt; {name}</Link>{' '}
       <button
         onClick={() => {
@@ -29,6 +29,6 @@ export const ListItem = memo(({ _id, name, ...restOf }: Props) => {
       >
         X
       </button>
-    </div>
+    </span>
   );
 });
