@@ -1,0 +1,14 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [ master ]
+jobs:
+  test:
+    runs-on: node:lts
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install deps
+      run: npm install
+    - name: Tests
+      run: npm run test
